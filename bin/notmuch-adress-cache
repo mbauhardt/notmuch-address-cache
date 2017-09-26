@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+cmd_version() {
+  cat << _EOF
+========================================================================================================================
+= notmuch-address-cache: search in all addresses (from,to,cc) within the cached version of the notmuch-address command =
+=                                                                                                                      =
+=                                                         v0.1                                                         =
+=                                                                                                                      =
+=                                  https://github.com/mbauhardt/notmuch-address-cache                                  =
+========================================================================================================================
+_EOF
+}
+
+cmd_help() {
+  cmd_version
+  echo
+}
+
+case "$1" in
+  -h|--help|help)
+    cmd_help
+    ;;
+esac
+exit 0
