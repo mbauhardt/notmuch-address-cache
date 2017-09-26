@@ -15,11 +15,40 @@ _EOF
 cmd_help() {
   cmd_version
   echo
+  cat << _EOF
+Usage:
+  notmuch-address-cache rebuild
+    Rebuild the cache of all sender/recipients you communicated with.
+_EOF
+}
+
+count_cache_items() {
+  while [ true ]
+  do
+    local line_count=`cat ~/.notmuch-address-cache/addresses | wc -l`
+    echo "Number of cached email addresses: ${line_count}"
+    sleep 5
+  done
+}
+
+cmd_rebuild() {
+  echo
+  mkdir -p ~/.notmuch-address-cache
+  touch ~/.notmuch-address-cache/addresses
+  count_cache_items &
+  pid_count=$!
+  notmuch address --output=sender --output=recipients tag:all > ~/.notmuch-address-cache/addresses
+  local line_count=`cat ~/.notmuch-address-cache/addresses | wc -l`
+  echo "Your cache contains: ${line_count} email addresses."
+  kill $pid_count 
 }
 
 case "$1" in
   -h|--help|help)
     cmd_help
+    ;;
+  -r|--rebuild|rebuild)
+    cmd_rebuild
     ;;
 esac
 exit 0
