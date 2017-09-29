@@ -17,8 +17,12 @@ cmd_help() {
   echo
   cat << _EOF
 Usage:
+  notmuch-address-cache help
+    Show this help text
   notmuch-address-cache rebuild
     Rebuild the cache of all sender/recipients you communicated with.
+  notmuch-address-cache query name
+    Grep the cached address file for the given name
 _EOF
 }
 
@@ -43,12 +47,22 @@ cmd_rebuild() {
   kill $pid_count 
 }
 
+cmd_query() {
+  echo
+  local terms=$@
+  grep -iE "${terms}" ~/.notmuch-address-cache/addresses
+}
+
 case "$1" in
   -h|--help|help)
     cmd_help
     ;;
   -r|--rebuild|rebuild)
     cmd_rebuild
+    ;;
+  -q|--query|query)
+    shift
+    cmd_query "$@"
     ;;
 esac
 exit 0
