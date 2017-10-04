@@ -1,16 +1,16 @@
-notmuch-address-cache(1)                                                                                                                notmuch-address-cache(1)
+    notmuch-address-cache(1)                                                                                                                notmuch-address-cache(1)
 
 
 
-NAME
+    NAME
        notmuch-address-cache - caches the result from notmuch-address and search within this cached version.
 
 
-SYNOPSIS
+    SYNOPSIS
        notmuch-address-cache [ COMMAND ] [ ARG ]
 
 
-DESCRIPTION
+    DESCRIPTION
        notmuch-address-cache is basically a cache in front of the notmuch-address command.
 
        notmuch-address-cache caches all sender and recipients you communicated with. It expect the notmuch tag tag:all on all messages to extract the sender and
@@ -18,7 +18,7 @@ DESCRIPTION
        into section [new] and add the value all to the key tags.
 
 
-Commands
+    Commands
        help, --help, -h
               Show help text.
 
@@ -36,4 +36,4 @@ Commands
 
 
 
-version v0.1                                                                Sep 2017                                                    notmuch-address-cache(1)
+    version v0.1                                                                Sep 2017                                                    notmuch-address-cache(1)
