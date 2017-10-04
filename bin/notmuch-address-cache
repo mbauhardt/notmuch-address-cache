@@ -32,7 +32,7 @@ cmd_help() {
 Usage:
   notmuch-address-cache help
     Show this help text
-  notmuch-address-cache rebuild
+  notmuch-address-cache rebuild [--json|--text]
     Rebuild the cache of all sender/recipients you communicated with.
   notmuch-address-cache query name
     Grep the cached address file for the given name
@@ -42,11 +42,25 @@ _EOF
 
 cmd_rebuild() {
   echo
+  local format=$1
   mkdir -p ~/.notmuch-address-cache
   touch ~/.notmuch-address-cache/addresses
+  
   count_cache_items &
   pid_count=$!
-  notmuch address --output=sender --output=recipients tag:all > ~/.notmuch-address-cache/addresses
+  
+  case $format in
+    --text)
+      notmuch address --format=text --output=sender --output=recipients tag:all > ~/.notmuch-address-cache/addresses
+      ;;
+    --json)
+      notmuch address --format=json --output=sender --output=recipients tag:all > ~/.notmuch-address-cache/addresses
+      ;;
+    *)
+      notmuch address --format=json --output=sender --output=recipients tag:all > ~/.notmuch-address-cache/addresses
+      ;;
+  esac 
+  
   local line_count=`cat ~/.notmuch-address-cache/addresses | wc -l`
   echo "Your cache contains: ${line_count} email addresses."
   kill $pid_count 
@@ -66,11 +80,15 @@ case "$1" in
     cmd_version
     ;;
   -r|--rebuild|rebuild)
-    cmd_rebuild
+    shift
+    cmd_rebuild "$@"
     ;;
   -q|--query|query)
     shift
     cmd_query "$@"
+    ;;
+  *)
+    cmd_help
     ;;
 esac
 exit 0

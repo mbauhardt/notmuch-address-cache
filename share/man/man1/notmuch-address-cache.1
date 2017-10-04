@@ -30,8 +30,8 @@ Show help text.
 \fBversion\fP, \fB--version\fP, \fB-v\fP
 Show the version.
 .TP
-\fBrebuild\fP, \fB--rebuild\fP, \fB-r\fP
-Uses \fInotmuch-address\fP to find all sender/recipient you communicated with and print them out to the file \fI~/.notmuch-address-cache/addresses\fP.
+\fBrebuild\fP, \fB--rebuild\fP, \fB-r\fP [\fB--json\fP | \fB--text\fP]
+Uses \fInotmuch-address\fP to find all sender/recipient you communicated with and print them out to the file \fI~/.notmuch-address-cache/addresses\fP. The format of the cached addresses are stored in json, if you rebuild your cache with option \fB--json\fP. The format of the cached addresses are stored in text, if you rebuild your cache with option\fB--text\fP. Format text is recommended if you want to query the cache with \fBmutt\fP. Format json is recommended if you want to query the cache with \fBalot\fP.
 .TP
 \fBquery\fP, \fB--query\fP, \fB-q\fP
 greps bla bla
