@@ -61,9 +61,37 @@ cmd_rebuild() {
       ;;
   esac 
   
-  local line_count=`cat ~/.notmuch-address-cache/addresses | wc -l`
+  local line_count=`cat ~/.notmuch-address-cache/addresses | wc -l | tr -d ' '`
   echo "Your cache contains: ${line_count} email addresses."
   kill $pid_count 
+}
+
+cmd_update() {
+  echo
+  local format=$1
+  case $format in
+    --text)
+      notmuch address --format=text --output=sender --output=recipients tag:new > ~/.notmuch-address-cache/addresses.new
+    ;;
+    --json)
+      notmuch address --format=json --output=sender --output=recipients tag:new > ~/.notmuch-address-cache/addresses.new
+    ;;
+    *)
+      notmuch address --format=json --output=sender --output=recipients tag:new > ~/.notmuch-address-cache/addresses.new
+    ;;
+  esac
+
+  local line_count=`cat ~/.notmuch-address-cache/addresses.new | wc -l | tr -d ' '`
+  echo "Found ${line_count} (maybe new) email addresses. They will be merged to your cache right now."
+  
+  # remove brackets '[' and ']' to compute duplicates afterwards
+  cat ~/.notmuch-address-cache/addresses.new ~/.notmuch-address-cache/addresses | sed -e s/\\\]$/,/g | sed -e s/^\\\[//g > ~/.notmuch-address-cache/addresses.merge
+  
+  # remove duplicates
+  #cat -n ~/.notmuch-address-cache/addresses.merge  | sort --key=2.1 -b -u | sort -n | cut -c8- > ~/.notmuch-address-cache/addresses 
+  awk '!seen[$0]++' ~/.notmuch-address-cache/addresses.merge > ~/.notmuch-address-cache/addresses
+  local line_count=`cat ~/.notmuch-address-cache/addresses | wc -l | tr -d ' '`
+  echo "Your updated cache contains now ${line_count} email addresses."
 }
 
 cmd_query() {
@@ -82,6 +110,10 @@ case "$1" in
   -r|--rebuild|rebuild)
     shift
     cmd_rebuild "$@"
+    ;;
+  -u|--update|update)
+    shift
+    cmd_update "@"
     ;;
   -q|--query|query)
     shift
