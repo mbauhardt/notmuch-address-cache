@@ -7,16 +7,12 @@ notmuch-address-search can be use to be fast when searching for recipient.
 
 ## Dependencies
 
-[notmuch](https://notmuchmail.org)
-
-[sed](http://sed.sourceforge.net/)
-
-[awk](https://www.gnu.org/software/gawk/manual/gawk.html)
+[notmuch](https://notmuchmail.org), [sed](http://sed.sourceforge.net/), [awk](https://www.gnu.org/software/gawk/manual/gawk.html)
 
 
 ## Usage
 
-See [Manual](https://raw.githubusercontent.com/mbauhardt/notmuch-address-cache/master/manual)
+[Manual](https://raw.githubusercontent.com/mbauhardt/notmuch-address-cache/master/manual)
 
 
 ## Installation
