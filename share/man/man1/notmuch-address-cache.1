@@ -33,5 +33,8 @@ Show the version.
 \fBrebuild\fP, \fB--rebuild\fP, \fB-r\fP [\fB--json\fP | \fB--text\fP]
 Uses \fInotmuch-address\fP to find all sender/recipient you communicated with and print them out to the file \fI~/.notmuch-address-cache/addresses\fP. The format of the cached addresses are stored in json, if you rebuild your cache with option \fB--json\fP. The format of the cached addresses are stored in text, if you rebuild your cache with option\fB--text\fP. Format text is recommended if you want to query the cache with \fBmutt\fP. Format json is recommended if you want to query the cache with \fBalot\fP.
 .TP
+\fBupdate\fP, \fB--update\fP, \fB-u\fP [\fB--json\fP | \fB--text\fP]
+Uses \fInotmuch-address\fP to find all sender/recipient, based on the \fBtag:new\fP, you communicated with and print them out to the file \fI~/.notmuch-address-cache/addresses\fP. The format of the cached addresses are stored in json, if you update your cache with option \fB--json\fP. The format of the cached addresses are stored in text, if you update your cache with option \fB--text\fP.
+.TP
 \fBquery\fP, \fB--query\fP, \fB-q\fP
-greps bla bla
+Greps the cache file for the given query. Interpret the query as an extended regular expression. Perform case insesitive matching. 
