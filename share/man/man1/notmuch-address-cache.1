@@ -19,7 +19,7 @@ is basically a cache in front of the
 .I notmuch-address
 command.
 
-notmuch-address-cache caches all sender and recipients you communicated with. It expect the notmuch tag \fbtag:all\fP on all messages to extract the sender and recipients from there. You can configure notmuch to apply the \fBtag:all\fP to all messages. This is basically done if you edit the file \fI~/.notmuch-config\fP, go into section [new] and add the value \fBall\fP to the key \fBtags\fP.
+notmuch-address-cache caches all sender and recipients you communicated with. 
 
 .SH Commands
 
@@ -34,7 +34,7 @@ Show the version.
 Uses \fInotmuch-address\fP to find all sender/recipient you communicated with and print them out to the file \fI~/.notmuch-address-cache/addresses\fP. The format of the cached addresses are stored in json, if you rebuild your cache with option \fB--json\fP. The format of the cached addresses are stored in text, if you rebuild your cache with option\fB--text\fP. Format text is recommended if you want to query the cache with \fBmutt\fP. Format json is recommended if you want to query the cache with \fBalot\fP.
 .TP
 \fBupdate\fP, \fB--update\fP, \fB-u\fP [\fB--json\fP | \fB--text\fP]
-Uses \fInotmuch-address\fP to find all sender/recipient, based on the \fBtag:new\fP, you communicated with and print them out to the file \fI~/.notmuch-address-cache/addresses\fP. The format of the cached addresses are stored in json, if you update your cache with option \fB--json\fP. The format of the cached addresses are stored in text, if you update your cache with option \fB--text\fP.
+Uses \fInotmuch-address\fP to find all sender/recipient, based on the \fBtag:new\fP, you communicated with and prepend them out to the file \fI~/.notmuch-address-cache/addresses\fP. It expect the notmuch tag \fbtag:new\fP on all messages to extract the sender and recipients from there. You can configure notmuch to apply the \fBtag:new\fP to all messages. This is basically done if you edit the file \fI~/.notmuch-config\fP, go into section [new] and add the value \fBnew\fP to the key \fBtags\fP. For more details see https://notmuchmail.org/initial_tagging/ in section 'The \fInew\fP tag approach'. The format of the cached addresses are stored in json, if you update your cache with option \fB--json\fP. The format of the cached addresses are stored in text, if you update your cache with option \fB--text\fP.
 .TP
 \fBquery\fP, \fB--query\fP, \fB-q\fP
 Greps the cache file for the given query. Interpret the query as an extended regular expression. Perform case insesitive matching. 

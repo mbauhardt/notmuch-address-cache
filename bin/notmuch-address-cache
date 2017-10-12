@@ -51,13 +51,13 @@ cmd_rebuild() {
   
   case $format in
     --text)
-      notmuch address --format=text --output=sender --output=recipients tag:all > ~/.notmuch-address-cache/addresses
+      notmuch address --format=text --output=sender --output=recipients "*" > ~/.notmuch-address-cache/addresses
       ;;
     --json)
-      notmuch address --format=json --output=sender --output=recipients tag:all > ~/.notmuch-address-cache/addresses
+      notmuch address --format=json --output=sender --output=recipients "*" > ~/.notmuch-address-cache/addresses
       ;;
     *)
-      notmuch address --format=json --output=sender --output=recipients tag:all > ~/.notmuch-address-cache/addresses
+      notmuch address --format=json --output=sender --output=recipients "*" > ~/.notmuch-address-cache/addresses
       ;;
   esac 
   
