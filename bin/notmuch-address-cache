@@ -25,6 +25,15 @@ count_cache_items() {
   done
 }
 
+count_new_cache_items() {
+  while [ true ]
+  do
+    local line_count=`cat ~/.notmuch-address-cache/addresses.new | wc -l | tr -d ' '`
+    echo "Found ${line_count} (maybe new) email addresses."
+    sleep 5
+  done
+}
+
 cmd_help() {
   cmd_description
   echo
@@ -69,6 +78,11 @@ cmd_rebuild() {
 cmd_update() {
   echo
   local format=$1
+  touch ~/.notmuch-address-cache/addresses.new
+  
+  count_new_cache_items &
+  pid_count=$!
+
   case $format in
     --text)
       notmuch address --format=text --output=sender --output=recipients tag:new > ~/.notmuch-address-cache/addresses.new
@@ -83,7 +97,7 @@ cmd_update() {
 
   local line_count=`cat ~/.notmuch-address-cache/addresses.new | wc -l | tr -d ' '`
   echo "Found ${line_count} (maybe new) email addresses. They will be merged to your cache right now."
-  
+
   # remove brackets '[' and ']' to compute duplicates afterwards
   cat ~/.notmuch-address-cache/addresses.new ~/.notmuch-address-cache/addresses | sed -e s/\\\]$/,/g | sed -e s/^\\\[//g > ~/.notmuch-address-cache/addresses.merge
   
@@ -92,6 +106,7 @@ cmd_update() {
   awk '!seen[$0]++' ~/.notmuch-address-cache/addresses.merge > ~/.notmuch-address-cache/addresses
   local line_count=`cat ~/.notmuch-address-cache/addresses | wc -l | tr -d ' '`
   echo "Your updated cache contains now ${line_count} email addresses."
+  kill $pid_count 
 }
 
 cmd_query() {
