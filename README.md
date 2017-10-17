@@ -12,7 +12,28 @@ notmuch-address-search can be use to be fast when searching for recipient.
 
 ## Usage
 
-[Manual](https://raw.githubusercontent.com/mbauhardt/notmuch-address-cache/master/manual)
+    % notmuch-address-cache rebuild --json
+
+    Number of cached email addresses:        0
+    Number of cached email addresses:      660
+    Number of cached email addresses:      904
+    Number of cached email addresses:     1136
+    Number of cached email addresses:     1313
+    Number of cached email addresses:     1806
+    Number of cached email addresses:     2451
+    Number of cached email addresses:     2561
+    Your cache contains: 2589 email addresses.
+
+
+    % notmuch-address-cache update --json 
+
+    Found 0 (maybe new) email addresses.
+    Found 11 (maybe new) email addresses.
+    Found 11 (maybe new) email addresses. They will be merged to your cache right now.
+    Your updated cache contains now 2600 email addresses.
+
+
+See [Manual](https://raw.githubusercontent.com/mbauhardt/notmuch-address-cache/master/manual) for more details.
 
 
 ## Installation
