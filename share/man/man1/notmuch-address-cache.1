@@ -37,4 +37,23 @@ Uses \fInotmuch-address\fP to find all sender/recipient you communicated with an
 Uses \fInotmuch-address\fP to find all sender/recipient, based on the \fBtag:new\fP, you communicated with and prepend them out to the file \fI~/.notmuch-address-cache/addresses\fP. It expect the notmuch tag \fbtag:new\fP on all messages to extract the sender and recipients from there. You can configure notmuch to apply the \fBtag:new\fP to all messages. This is basically done if you edit the file \fI~/.notmuch-config\fP, go into section [new] and add the value \fBnew\fP to the key \fBtags\fP. For more details see https://notmuchmail.org/initial_tagging/ in section 'The \fInew\fP tag approach'. The format of the cached addresses are stored in json, if you update your cache with option \fB--json\fP. The format of the cached addresses are stored in text, if you update your cache with option \fB--text\fP.
 .TP
 \fBquery\fP, \fB--query\fP, \fB-q\fP
-Greps the cache file for the given query. Interpret the query as an extended regular expression. Perform case insesitive matching. 
+Greps the cache file for the given query. Interpret the query as an extended regular expression. Perform case insesitive matching.
+
+.SH Example Workflow
+Setup notmuch to use 'The \fInew\fP tag approach'. See https://notmuchmail.org/initial_tagging/.
+.TP
+\fBmutt\fP - Using mutt as mua
+Rebuild your cache by Executing \fbnotmuch-address-cache rebuild --text\fP. Edit your \fI.muttrc\fP file and add the query command \fBset query_command = "notmuch-address-cache query '%s'"\fP.
+.TP
+\fBalot\fP - Using alot as mua
+Rebuild your cache by Executing \fbnotmuch-address-cache rebuild --json\fP. Edit your \fI.config/alot/config\fP file and add the query command under the \fIabook\fP section.  \fBcommand = 'notmuch-address-cache query'\fP.
+
+[accounts]
+  [[youraccount]]
+    [[abook]]
+      type = shellcommand
+      command = 'notmuch-address-cache query'
+      regexp = '\\[?{"name": "(?P<name>.*)", "address": "(?P<email>.+)", "name-addr": ".*"}[,\\]]?'
+      shellcommand_external_filtering = False
+
+ 
