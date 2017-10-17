@@ -128,7 +128,7 @@ case "$1" in
     ;;
   -u|--update|update)
     shift
-    cmd_update "@"
+    cmd_update "$@"
     ;;
   -q|--query|query)
     shift
