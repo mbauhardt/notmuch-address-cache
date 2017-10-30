@@ -39,8 +39,7 @@ Uses \fInotmuch-address\fP to find all sender/recipient, based on the \fBtag:new
 \fBquery\fP, \fB--query\fP, \fB-q\fP
 Greps the cache file for the given query. Interpret the query as an extended regular expression. Perform case insesitive matching.
 
-.SH Example Workflow
-Setup notmuch to use 'The \fInew\fP tag approach'. See https://notmuchmail.org/initial_tagging/.
+.SH Example Workflow - Rebuild the cache
 .TP
 \fBmutt\fP - Using mutt as mua
 Rebuild your cache by Executing \fbnotmuch-address-cache rebuild --text\fP. Edit your \fI.muttrc\fP file and add the query command \fBset query_command = "notmuch-address-cache query '%s'"\fP.
@@ -56,4 +55,8 @@ Rebuild your cache by Executing \fbnotmuch-address-cache rebuild --json\fP. Edit
       regexp = '\\[?{"name": "(?P<name>.*)", "address": "(?P<email>.+)", "name-addr": ".*"}[,\\]]?'
       shellcommand_external_filtering = False
 
- 
+.SH Example Workflow - Update the cache based on new incoming emails
+Setup notmuch to use 'The \fInew\fP tag approach'. The new approach is there to act only on new emails instead of the whole mail database. This will speedup the entire update of your address cache. See https://notmuchmail.org/initial_tagging/. After that you can do it manual by executing \fBnotmuch-address-cache update --json\fP or
+\fBnotmuch-address-cache update --text\fP.
+
+If you are using offlineimap you can configure a postsynchook to update your cache. See e.g. http://www.offlineimap.org/doc/ConfigurationFactorization.html.

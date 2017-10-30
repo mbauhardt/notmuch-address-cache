@@ -43,6 +43,8 @@ Usage:
     Show this help text
   notmuch-address-cache rebuild [--json|--text]
     Rebuild the cache of all sender/recipients you communicated with.
+  notmuch-address-cache update [--json|--text]
+    Updates the cache of all sender/recipients you communicated with, based on emails tagged with 'tag:new'.
   notmuch-address-cache query name
     Grep the cached address file for the given name
 _EOF
