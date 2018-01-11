@@ -1,73 +1,96 @@
-notmuch-address-cache(1)                                                                                                                notmuch-address-cache(1)
+notmuch-address-cache(1)                              notmuch-address-cache(1)
 
 
 
-NAME
-       notmuch-address-cache - caches the result from notmuch-address and search within this cached version.
+NNAAMMEE
+       notmuch-address-cache  -  caches  the  result  from notmuch-address and
+       search within this cached version.
 
 
-SYNOPSIS
-       notmuch-address-cache [ COMMAND ] [ ARG ]
+SSYYNNOOPPSSIISS
+       nnoottmmuucchh--aaddddrreessss--ccaacchhee [ _C_O_M_M_A_N_D ] [ _A_R_G ]
 
 
-DESCRIPTION
-       notmuch-address-cache is basically a cache in front of the notmuch-address command.
+DDEESSCCRRIIPPTTIIOONN
+       nnoottmmuucchh--aaddddrreessss--ccaacchhee is basically a cache in  front  of  the  _n_o_t_m_u_c_h_-
+       _a_d_d_r_e_s_s command.
 
-       notmuch-address-cache caches all sender and recipients you communicated with.
+       notmuch-address-cache caches all sender and recipients you communicated
+       with.
 
 
-Commands
-       help, --help, -h
+CCoommmmaannddss
+       hheellpp, ----hheellpp, --hh
               Show help text.
 
-       version, --version, -v
+       vveerrssiioonn, ----vveerrssiioonn, --vv
               Show the version.
 
-       rebuild, --rebuild, -r [--json | --text]
-              Uses  notmuch-address  to  find  all sender/recipient you communicated with and print them out to the file ~/.notmuch-address-cache/addresses. The
-              format of the cached addresses are stored in json, if you rebuild your cache with option --json. The format of the cached addresses are stored  in
-              text, if you rebuild your cache with option--text. Format text is recommended if you want to query the cache with mutt. Format json is recommended
-              if you want to query the cache with alot.
+       rreebbuuiilldd, ----rreebbuuiilldd, --rr [----jjssoonn | ----tteexxtt]
+              Uses _n_o_t_m_u_c_h_-_a_d_d_r_e_s_s to find all sender/recipient  you  communi-
+              cated  with  and  print them out to the file _~_/_._n_o_t_m_u_c_h_-_a_d_d_r_e_s_s_-
+              _c_a_c_h_e_/_a_d_d_r_e_s_s_e_s. The format of the cached addresses  are  stored
+              in  json, if you rebuild your cache with option ----jjssoonn. The for-
+              mat of the cached addresses are stored in text, if  you  rebuild
+              your  cache with option----tteexxtt. Format text is recommended if you
+              want to query the cache with mmuutttt. Format json is recommended if
+              you want to query the cache with aalloott.
 
-       update, --update, -u [--json | --text]
-              Uses notmuch-address to find all sender/recipient, based on the tag:new, you communicated with and  prepend  them  out  to  the  file  ~/.notmuch-
-              address-cache/addresses. It expect the notmuch tag tag:new on all messages to extract the sender and recipients from there. You can configure not-
-              much to apply the tag:new to all messages. This is basically done if you edit the file ~/.notmuch-config, go into section [new] and add the  value
-              new  to  the  key  tags. For more details see https://notmuchmail.org/initial_tagging/ in section 'The new tag approach'. The format of the cached
-              addresses are stored in json, if you update your cache with option --json. The format of the cached addresses are stored in text,  if  you  update
-              your cache with option --text.
+       uuppddaattee, ----uuppddaattee, --uu [----jjssoonn | ----tteexxtt]
+              Uses  _n_o_t_m_u_c_h_-_a_d_d_r_e_s_s to find all sender/recipient, based on the
+              ttaagg::nneeww, you communicated with and prepend them out to the  file
+              _~_/_._n_o_t_m_u_c_h_-_a_d_d_r_e_s_s_-_c_a_c_h_e_/_a_d_d_r_e_s_s_e_s.  It  expect  the notmuch tag
+              ttaagg::nneeww on all messages to extract  the  sender  and  recipients
+              from  there.  You  can configure notmuch to apply the ttaagg::nneeww to
+              all messages. This is  basically  done  if  you  edit  the  file
+              _~_/_._n_o_t_m_u_c_h_-_c_o_n_f_i_g,  go  into section [new] and add the value nneeww
+              to  the  key  ttaaggss.  For  more  details   see   https://notmuch-
+              mail.org/initial_tagging/ in section 'The _n_e_w tag approach'. The
+              format of the cached addresses are stored in json, if you update
+              your  cache  with  option  ----jjssoonn.  The  format  of  the  cached
+              addresses are stored in text, if  you  update  your  cache  with
+              option ----tteexxtt.
 
-       query, --query, -q
-              Greps the cache file for the given query. Interpret the query as an extended regular expression. Perform case insesitive matching.
+       qquueerryy, ----qquueerryy, --qq
+              Greps the cache file for the given query. Interpret the query as
+              an extended regular expression. Perform case  insesitive  match-
+              ing.
 
 
-Example Workflow - Rebuild the cache
-       mutt - Using mutt as mua
-              Rebuild  your  cache by Executing notmuch-address-cache rebuild --text. Edit your .muttrc file and add the query command set query_command = "not-
-              much-address-cache query '%s'".
+EExxaammppllee WWoorrkkffllooww -- RReebbuuiilldd tthhee ccaacchhee
+       mmuutttt - Using mutt as mua
+              Rebuild  your  cache  by Executing nnoottmmuucchh--aaddddrreessss--ccaacchhee rreebbuuiilldd
+              ----tteexxtt. Edit your _._m_u_t_t_r_c file and add  the  query  command  sseett
+              qquueerryy__ccoommmmaanndd == ""nnoottmmuucchh--aaddddrreessss--ccaacchhee qquueerryy ''%%ss''"".
 
-       alot - Using alot as mua
-              Rebuild your cache by Executing notmuch-address-cache rebuild --json. Edit your .config/alot/config file and add the query command under the abook
-              section.  command = 'notmuch-address-cache query'.
+       aalloott - Using alot as mua
+              Rebuild  your  cache  by Executing nnoottmmuucchh--aaddddrreessss--ccaacchhee rreebbuuiilldd
+              ----jjssoonn. Edit your _._c_o_n_f_i_g_/_a_l_o_t_/_c_o_n_f_i_g file  and  add  the  query
+              command  under  the  _a_b_o_o_k section.  ccoommmmaanndd == ''nnoottmmuucchh--aaddddrreessss--
+              ccaacchhee qquueerryy''.
 
               [accounts]
                 [[youraccount]]
                   [[abook]]
                     type = shellcommand
                     command = 'notmuch-address-cache query'
-                    regexp = '\[?{"name": "(?P<name>.*)", "address": "(?P<email>.+)", "name-addr": ".*"}[,\]]?'
+                    regexp   =   '\[?{"name":    "(?P<name>.*)",    "address":
+              "(?P<email>.+)", "name-addr": ".*"}[,\]]?'
                     shellcommand_external_filtering = False
 
 
-Example Workflow - Update the cache based on new incoming emails
-       Setup  notmuch  to  use 'The new tag approach'. The new approach is there to act only on new emails instead of the whole mail database. This will speedup
-       the entire update of your address cache. See https://notmuchmail.org/initial_tagging/. After that you can do it manual by executing notmuch-address-cache
-       update --json or notmuch-address-cache update --text.
+EExxaammppllee WWoorrkkffllooww -- UUppddaattee tthhee ccaacchhee bbaasseedd oonn nneeww iinnccoommiinngg eemmaaiillss
+       Setup  notmuch to use 'The _n_e_w tag approach'. The new approach is there
+       to act only on new emails instead of the whole mail database. This will
+       speedup  the  entire update of your address cache. See https://notmuch-
+       mail.org/initial_tagging/. After that you can do it manual by executing
+       nnoottmmuucchh--aaddddrreessss--ccaacchhee  uuppddaattee  ----jjssoonn  or  nnoottmmuucchh--aaddddrreessss--ccaacchhee uuppddaattee
+       ----tteexxtt.
 
-       If  you  are  using  offlineimap  you  can configure a postsynchook to update your cache. See e.g. http://www.offlineimap.org/doc/ConfigurationFactoriza-
-       tion.html.
+       If you are using offlineimap you can configure a postsynchook to update
+       your  cache.  See e.g. http://www.offlineimap.org/doc/ConfigurationFac-
+       torization.html.
 
 
 
-version v0.1                                                                Sep 2017                                                    notmuch-address-cache(1)
-
+version 0.1                        Sep 2017           notmuch-address-cache(1)
