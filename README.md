@@ -33,7 +33,7 @@ notmuch-address-search can be use to be fast when searching for recipient.
     Your updated cache contains now 2600 email addresses.
 
 
-See [Manual](https://raw.githubusercontent.com/mbauhardt/notmuch-address-cache/master/manual) for more details.
+See [Manual](https://raw.githubusercontent.com/mbauhardt/notmuch-address-cache/master/manual.html) for more details.
 
 
 ## Installation

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <style>
+    table.head, table.foot { width: 100%; }
+    td.head-rtitle, td.foot-os { text-align: right; }
+    td.head-vol { text-align: center; }
+    div.Pp { margin: 1ex 0ex; }
+  </style>
+  <title>notmuch-address-cache(1)</title>
+</head>
+<body>
+<table class="head">
+  <tr>
+    <td class="head-ltitle">notmuch-address-cache(1)</td>
+    <td class="head-vol">General Commands Manual</td>
+    <td class="head-rtitle">notmuch-address-cache(1)</td>
+  </tr>
+</table>
+<div class="manual-text">
+<h1 class="Sh" title="Sh" id="NAME"><a class="selflink" href="#NAME">NAME</a></h1>
+notmuch-address-cache - caches the result from notmuch-address and search within
+  this cached version.
+<div style="height: 1.00em;">&#x00A0;</div>
+<h1 class="Sh" title="Sh" id="SYNOPSIS"><a class="selflink" href="#SYNOPSIS">SYNOPSIS</a></h1>
+<b>notmuch-address-cache</b> [ <i>COMMAND</i> ] [ <i>ARG</i> ]
+<div style="height: 1.00em;">&#x00A0;</div>
+<h1 class="Sh" title="Sh" id="DESCRIPTION"><a class="selflink" href="#DESCRIPTION">DESCRIPTION</a></h1>
+<b>notmuch-address-cache</b> is basically a cache in front of the
+  <i>notmuch-address</i> command.
+<div style="height: 1.00em;">&#x00A0;</div>
+notmuch-address-cache caches all sender and recipients you communicated with.
+<div style="height: 1.00em;">&#x00A0;</div>
+<h1 class="Sh" title="Sh" id="Commands"><a class="selflink" href="#Commands">Commands</a></h1>
+<dl class="Bl-tag">
+  <dt class="It-tag"><b>help</b>, <b>--help</b>, <b>-h</b></dt>
+  <dd class="It-tag">Show help text.</dd>
+</dl>
+<dl class="Bl-tag">
+  <dt class="It-tag"><b>version</b>, <b>--version</b>, <b>-v</b></dt>
+  <dd class="It-tag">Show the version.</dd>
+</dl>
+<dl class="Bl-tag">
+  <dt class="It-tag"><b>rebuild</b>, <b>--rebuild</b>, <b>-r</b> [<b>--json</b>
+    | <b>--text</b>]</dt>
+  <dd class="It-tag">Uses <i>notmuch-address</i> to find all sender/recipient
+      you communicated with and print them out to the file
+      <i>~/.notmuch-address-cache/addresses</i>. The format of the cached
+      addresses are stored in json, if you rebuild your cache with option
+      <b>--json</b>. The format of the cached addresses are stored in text, if
+      you rebuild your cache with option <b>--text</b>. Format text is
+      recommended if you want to query the cache with <b>mutt</b>. Format json
+      is recommended if you want to query the cache with <b>alot</b>.</dd>
+</dl>
+<dl class="Bl-tag">
+  <dt class="It-tag"><b>update</b>, <b>--update</b>, <b>-u</b> [<b>--json</b> |
+    <b>--text</b>]</dt>
+  <dd class="It-tag">Uses <i>notmuch-address</i> to find all sender/recipient,
+      based on the <b>tag:new</b>, you communicated with and prepend them out to
+      the file <i>~/.notmuch-address-cache/addresses</i>. It expect the notmuch
+      tag tag:new on all messages to extract the sender and recipients from
+      there. You can configure notmuch to apply the <b>tag:new</b> to all
+      messages. This is basically done if you edit the file
+      <i>~/.notmuch-config</i>, go into section [new] and add the value
+      <b>new</b> to the key <b>tags</b>. For more details see
+      https://notmuchmail.org/initial_tagging/ in section 'The <i>new</i> tag
+      approach'. The format of the cached addresses are stored in json, if you
+      update your cache with option <b>--json</b>. The format of the cached
+      addresses are stored in text, if you update your cache with option
+      <b>--text</b>.</dd>
+</dl>
+<dl class="Bl-tag">
+  <dt class="It-tag"><b>query</b>, <b>--query</b>, <b>-q</b></dt>
+  <dd class="It-tag">Greps the cache file for the given query. Interpret the
+      query as an extended regular expression. Perform case insesitive matching.
+    <div style="height: 1.00em;">&#x00A0;</div>
+  </dd>
+</dl>
+<h1 class="Sh" title="Sh" id="Example_Workflow_-_Rebuild_the_cache"><a class="selflink" href="#Example_Workflow_-_Rebuild_the_cache">Example
+  Workflow - Rebuild the cache</a></h1>
+<dl class="Bl-tag">
+  <dt class="It-tag"><b>mutt</b> - Using mutt as mua</dt>
+  <dd class="It-tag">Rebuild your cache by Executing notmuch-address-cache
+      rebuild --text. Edit your <i>.muttrc</i> file and add the query command
+      <b>set query_command = &quot;notmuch-address-cache query
+    '%s'&quot;</b>.</dd>
+</dl>
+<dl class="Bl-tag">
+  <dt class="It-tag"><b>alot</b> - Using alot as mua</dt>
+  <dd class="It-tag">Rebuild your cache by Executing notmuch-address-cache
+      rebuild --json. Edit your <i>.config/alot/config</i> file and add the
+      query command under the <i>abook</i> section. <b>command =
+      'notmuch-address-cache query'</b>.
+    <div style="height: 1.00em;">&#x00A0;</div>
+    [accounts]
+    <br/>
+     [[youraccount]]
+    <br/>
+     [[abook]]
+    <br/>
+     type = shellcommand
+    <br/>
+     command = 'notmuch-address-cache query'
+    <br/>
+     regexp = '\[?{&quot;name&quot;: &quot;(?P&lt;name&gt;.*)&quot;,
+      &quot;address&quot;: &quot;(?P&lt;email&gt;.+)&quot;,
+      &quot;name-addr&quot;: &quot;.*&quot;}[,\]]?'
+    <br/>
+     shellcommand_external_filtering = False
+    <div style="height: 1.00em;">&#x00A0;</div>
+  </dd>
+</dl>
+<h1 class="Sh" title="Sh" id="Example_Workflow_-_Update_the_cache_based_on_new_incoming_emails"><a class="selflink" href="#Example_Workflow_-_Update_the_cache_based_on_new_incoming_emails">Example
+  Workflow - Update the cache based on new incoming emails</a></h1>
+Setup notmuch to use 'The <i>new</i> tag approach'. The new approach is there to
+  act only on new emails instead of the whole mail database. This will speedup
+  the entire update of your address cache. See
+  https://notmuchmail.org/initial_tagging/. After that you can do it manual by
+  executing <b>notmuch-address-cache update --json</b> or
+  <b>notmuch-address-cache update --text</b>.
+<div style="height: 1.00em;">&#x00A0;</div>
+If you are using offlineimap you can configure a postsynchook to update your
+  cache. See e.g.
+  http://www.offlineimap.org/doc/ConfigurationFactorization.html.</div>
+<table class="foot">
+  <tr>
+    <td class="foot-date">Sep 2017</td>
+    <td class="foot-os">version 0.1</td>
+  </tr>
+</table>
+</body>
+</html>
