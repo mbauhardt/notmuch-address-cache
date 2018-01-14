@@ -2,7 +2,7 @@
 
 This program can be use to query contacts (names and email addresses) coming from notmuch. Querying sender directly with notmuch is fast. But querying for recipient are much slower. See [notmuch-address-1](https://notmuchmail.org/manpages/notmuch-address-1).
 
-notmuch-address-search can be use to be fast when searching for recipient.
+notmuch-address-cache can be use to be fast when searching for recipient.
 
 
 ## Installation
@@ -13,7 +13,7 @@ notmuch-address-search can be use to be fast when searching for recipient.
 
 ## Usage
 
-Rebuild (initialize) a cache of all contacts you emailed with.
+Rebuild (initialize) the cache of all contacts you emailed with.
 
     % notmuch-address-cache rebuild --json
 
@@ -53,6 +53,8 @@ See [Manual](https://raw.githubusercontent.com/mbauhardt/notmuch-address-cache/m
 
 ## Usage within alot
 
+Open your `alot` config file `~/.config/alot/config` and add the shellcommand to the `abook` section.
+
     [accounts]
       [[your_account]]
         realname = 
@@ -64,4 +66,16 @@ See [Manual](https://raw.githubusercontent.com/mbauhardt/notmuch-address-cache/m
             command = 'notmuch-address-cache query'
             regexp = '\[?{"name": "(?P<name>.*)", "address": "(?P<email>.+)", "name-addr": ".*"}[,\]]?'
             shellcommand_external_filtering = False
+
+
+## Usage within mutt
+
+Rebuild your cache with the `--text` option
+
+    notmuch-address-cache rebuild --text
+
+Open your `mutt` config file `~/.muttrc` and add the command into the `query_command`.
+
+    set query_command = "notmuch-address-cache query '%s'"
+
 
