@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 cmd_version() {
-  echo '0.1'
+  echo 'v0.2'
 }
 
 cmd_description() {
@@ -9,7 +9,7 @@ cmd_description() {
 ========================================================================================================================
 = notmuch-address-cache: search in all addresses (from,to,cc) within the cached version of the notmuch-address command =
 =                                                                                                                      =
-=                                                         0.1                                                         =
+=                                                         v0.2                                                         =
 =                                                                                                                      =
 =                                  https://github.com/mbauhardt/notmuch-address-cache                                  =
 ========================================================================================================================
